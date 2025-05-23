@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chimie Organică - Arenele | Smartys Med</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d49e98;
+      --secondary: #f1c40f;
+      --accent: #2c3e50;
+      --dark: #c0847d;
+      --light: #ecf0f1;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--primary));
+      color: var(--light);
+      animation: fadeIn 1s ease-in-out;
+      line-height: 1.6;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      padding: 25px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+      background: linear-gradient(to right, var(--secondary), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    a.home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    a.home-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(-3px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    h2, h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2:after, h3:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(to right, var(--secondary), transparent);
+      border-radius: 3px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    li:before {
+      content: '•';
+      color: var(--secondary);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .interactive-box {
+      background: rgba(212, 158, 152, 0.3);
+      border-left: 4px solid var(--secondary);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+
+    .interactive-box h4 {
+      margin-top: 0;
+      color: var(--secondary);
+    }
+
+    .quiz-container {
+      background: rgba(241, 196, 15, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-option {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .quiz-option.correct {
+      background: rgba(76, 175, 80, 0.7);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(244, 67, 54, 0.7);
+    }
+
+    .tab-container {
+      margin: 30px 0;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      color: var(--secondary);
+    }
+
+    .tab-btn.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .diagram {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
+    .diagram img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 2px solid var(--secondary);
+      cursor: zoom-in;
+      transition: transform 0.3s;
+    }
+
+    .diagram img.zoomed {
+      transform: scale(1.8);
+      cursor: zoom-out;
+      z-index: 100;
+      position: relative;
+    }
+
+    .memory-tip {
+      background: rgba(44, 62, 80, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .memory-tip i {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #ddd;
+      background: rgba(0,0,0,0.3);
+      margin-top: 50px;
+    }
+
+    .floating-btns {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .floating-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+      background: var(--secondary);
+    }
+
+    
+    .flashcards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .flashcard {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 150px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .flashcard-front, .flashcard-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .flashcard-front {
+      background: rgba(212, 158, 152, 0.5);
+      z-index: 2;
+    }
+
+    .flashcard-back {
+      background: rgba(44, 62, 80, 0.5);
+      transform: rotateY(180deg);
+    }
+    
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard h4 {
+      margin-top: 0;
+      color: var(--secondary);
+      text-align: center;
+    }
+
+    .flashcard p {
+      text-align: center;
+    }
+
+    .flashcard-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      .flashcards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      margin-top: 5vh;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: var(--secondary);
+    }
+
+    .chem-formula {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .chem-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .chem-table th, .chem-table td {
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .chem-table th {
+      background-color: rgba(212, 158, 152, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="lectii.html" class="home-btn"><i class="fas fa-arrow-left"></i> Inapoi</a>
+
+  <header>
+    <h1>Chimie Organică - Arenele</h1>
+    <p class="header-subtitle">Hidrocarburi aromatice cu nucleu benzenic</p>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Introducere în arene</h2>
+      
+      <p>Arenele sunt substanțe organice numite și hidrocarburi aromatice, conținând în molecula lor unul sau mai multe cicluri de 6 atomi de carbon (nucleul benzenic).</p>
+      
+      <div class="interactive-box">
+        <h4>Clasificarea arenelor</h4>
+        <p>Arenele sunt mononucleare sau polinucleare, în funcție de numărul de cicluri din molecula lor.</p>
+      </div>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="mononucleare">Mononucleare</button>
+          <button class="tab-btn" data-tab="polinucleare">Polinucleare</button>
+        </div>
+        
+        <div class="tab-content active" id="mononucleare">
+          <div class="diagram">
+            <img src="https://www.scientia.ro/images/stories/articles/stiinta_pe_scurt/chimie/arene/metilbenzen.jpg" alt="Arene mononucleare" class="zoomable">
+          </div>
+          <ul>
+            <li><strong>Benzen</strong> (C<sub>6</sub>H<sub>6</sub>)</li>
+            <li><strong>Toluen</strong> (metilbenzen)</li>
+            <li><strong>Etilbenzen</strong></li>
+            <li><strong>Propilbenzen</strong></li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="polinucleare">
+          <div class="diagram">
+            <img src="https://www.scientia.ro/images/stories/articles/stiinta_pe_scurt/chimie/arene/nuclee_condensate.jpg" alt="Arene polinucleare" class="zoomable">
+          </div>
+          <h4>Tipuri de arene polinucleare:</h4>
+          <ul>
+            <li><strong>Nuclee izolate</strong> - cicluri separate</li>
+            <li><strong>Nuclee condensate</strong> - cicluri cu atomi comuni</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Structura nucleului benzenic</h2>
+      
+      <div class="memory-tip">
+        <i class="fas fa-lightbulb"></i>
+        <div>
+          <h4>Pont pentru memorare:</h4>
+          <p>"Structura Kekulé explică anumite proprietăți ale benzenului, dar vine în contradicție cu altele"</p>
+        </div>
+      </div>
+      
+      <div class="diagram">
+        <img src="https://chimiedp.weebly.com/uploads/4/3/9/7/4397245/2975578_orig.gif" alt="Structura benzenului" class="zoomable">
+      </div>
+      
+      <h3>Dovezi experimentale</h3>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="pro-kekule">Pentru structura Kekulé</button>
+          <button class="tab-btn" data-tab="contra-kekule">Contra structurii Kekulé</button>
+          <button class="tab-btn" data-tab="hibridizare">Hibridizare și delocalizare</button>
+        </div>
+        
+        <div class="tab-content active" id="pro-kekule">
+          <ul>
+            <li>Raportul 1:1 dintre C și H</li>
+            <li>Cei 6 atomi de H din molecula benzenului sunt echivalenți între ei</li>
+            <li>În condiții speciale, benzenul participă și la reacții de adiție</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="contra-kekule">
+          <ul>
+            <li>Benzenul participă cu ușurință la reacții de substituție, asemănător compușilor saturați</li>
+            <li>Dacă ar fi nesaturat, ar trebui să participe la reacții de polimerizare (neconstatat)</li>
+            <li>Prevede izomeri care nu există în realitate</li>
+            <li>Stabil la oxidare (spre deosebire de alchene)</li>
+            <li>Molecula este hexagon regulat și plan</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="hibridizare">
+          <p>Mecanica cuantică admite atomii de C cu hibridizare sp<sup>2</sup>. Orbitalii p perpendiculari se contopesc, formând un orbital molecular extins cu electronii π delocalizați (conjugare).</p>
+          <div class="interactive-box">
+            <h4>Energie de conjugare</h4>
+            <p>Conjugarea degajă ~36 kcal/mol, conferind stabilitate moleculelor aromatice.</p>
+          </div>
+          <div class="diagram">
+            <img src="https://chimiedp.weebly.com/uploads/4/3/9/7/4397245/8926516_orig.jpg" alt="Orbitali moleculari în benzen" class="zoomable">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Izomeria derivaților polisubstituiți</h2>
+      
+      <p>Derivații polisubstituiți ai benzenului prezintă izomerie de poziție.</p>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="disubstit">Disubstituiți</button>
+          <button class="tab-btn" data-tab="trisubstit">Trisubstituiți</button>
+        </div>
+        
+        <div class="tab-content active" id="disubstit">
+            <h4>Tipuri de substituție</h4>
+          <ul>
+            <li><strong>orto- (o-)</strong>: substituenți în pozițiile 1,2</li>
+            <li><strong>meta- (m-)</strong>: substituenți în pozițiile 1,3</li>
+            <li><strong>para- (p-)</strong>: substituenți în pozițiile 1,4</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="trisubstit">
+          <h4>Tipuri de substituție</h4>
+          <ul>
+            <li><strong>1,2,3-</strong>: toți substituenții pe același parte</li>
+            <li><strong>1,2,4-</strong>: doi substituenți aproape, unul departe</li>
+            <li><strong>1,3,5-</strong>: substituenți echidistanți</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="interactive-box">
+        <h4>Orientarea substituenților</h4>
+        <p>Al doilea substituent se orientează în funcție de primul:</p>
+        <ul>
+          <li><strong>Ordinul I</strong> (-CH<sub>3</sub>, -OH, -X, -NH<sub>2</sub>): orientează orto/para</li>
+          <li><strong>Ordinul II</strong> (-NO<sub>2</sub>, -SO<sub>3</sub>H, -COOH): orientează meta</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Proprietăți fizice</h2>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-temperature-low flashcard-icon"></i>
+            <h4>Stare de agregare</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <ul>
+              <li>Solide și lichide</li>
+              <li>Benzenul: lichid (p.f. 5.5°C)</li>
+              <li>Naftalina: solid (2 nuclee condensate)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-wind flashcard-icon"></i>
+            <h4>Solubilitate</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <ul>
+              <li>Insolubile în apă</li>
+              <li>Solubile în solvenți organici</li>
+              <li>Arenele lichide sunt solvenți buni</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-smell flashcard-icon"></i>
+            <h4>Proprietăți senzoriale</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <ul>
+              <li>Miros specific</li>
+              <li>Benzenul: miros dulceag</li>
+              <li>Toluenul: folosit în diluanți</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Proprietăți chimice</h2>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="substitutie">Substituție</button>
+          <button class="tab-btn" data-tab="oxidare">Oxidare</button>
+          <button class="tab-btn" data-tab="aditie">Adiție</button>
+        </div>
+        
+        <div class="tab-content active" id="substitutie">
+          <h4>Reacții de substituție</h4>
+          <p>Înlocuirea unui atom de hidrogen de pe nucleu aromatic:</p>
+          
+          <div class="chem-formula">
+            <strong>Halogenare:</strong><br>
+            Br<sub>2</sub> + C<sub>6</sub>H<sub>6</sub> → C<sub>6</sub>H<sub>5</sub>Br + HBr<br><br>
+            
+            <strong>Sulfonare:</strong><br>
+            HOSO<sub>3</sub>H + C<sub>6</sub>H<sub>6</sub> → C<sub>6</sub>H<sub>5</sub>SO<sub>3</sub>H + H<sub>2</sub>O<br><br>
+            
+            <strong>Nitrare:</strong><br>
+            HNO<sub>3</sub> + C<sub>6</sub>H<sub>6</sub> → C<sub>6</sub>H<sub>5</sub>NO<sub>2</sub> + H<sub>2</sub>O<br><br>
+            
+            <strong>Alchilare (Friedel-Crafts):</strong><br>
+            CH<sub>3</sub>Cl + C<sub>6</sub>H<sub>6</sub> → C<sub>6</sub>H<sub>5</sub>CH<sub>3</sub> + HCl
+          </div>
+        </div>
+        
+        <div class="tab-content" id="oxidare">
+          <h4>Reacții de oxidare</h4>
+          <div class="chem-formula">
+            C<sub>6</sub>H<sub>5</sub>CH<sub>3</sub> + 3[O] → C<sub>6</sub>H<sub>5</sub>COOH + H<sub>2</sub>O<br>
+            (KMnO<sub>4</sub>)
+          </div>
+          <p>Oxidarea lanțurilor laterale fără afectarea nucleului aromatic.</p>
+        </div>
+        
+        <div class="tab-content" id="aditie">
+          <h4>Reacții de adiție</h4>
+          <p>Au loc în condiții energice datorită stabilității sistemului aromatic:</p>
+          
+          <div class="chem-formula">
+            <strong>Adiția clorului:</strong><br>
+            C<sub>6</sub>H<sub>6</sub> + 3Cl<sub>2</sub> → C<sub>6</sub>H<sub>6</sub>Cl<sub>6</sub><br><br>
+            
+            <strong>Adiția hidrogenului:</strong><br>
+            C<sub>6</sub>H<sub>6</sub> + 3H<sub>2</sub> → C<sub>6</sub>H<sub>12</sub><br>
+            (Ni/Pt catalizator)
+          </div>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Care dintre următoarele orientează substituenții în pozițiile meta?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">-CH<sub>3</sub></div>
+          <div class="quiz-option" data-correct="false">-OH</div>
+          <div class="quiz-option" data-correct="true">-NO<sub>2</sub></div>
+          <div class="quiz-option" data-correct="false">-NH<sub>2</sub></div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="zoomedImage">
+  </div>
+  
+  <div class="floating-btns">
+    <button class="floating-btn" id="summary-btn" title="Rezumat"><i class="fas fa-book"></i></button>
+    <button class="floating-btn" id="quiz-btn" title="Test rapid"><i class="fas fa-question"></i></button>
+    <button class="floating-btn" id="top-btn" title="Sus"><i class="fas fa-arrow-up"></i></button>
+  </div>
+
+  <footer>
+    bibliografie: "https://www.scientia.ro/stiinta-la-minut/64-scintilatii-stiintifice-chimie/1465-chimie-organica-arenele.html"
+    <br>
+    "https://archive.org/details/vladescu-luminita-chimie.-manual-clasa-a-x-a-2005-scan/page/87/mode/2up?view=theater"
+  </footer>
+
+  <script>
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+        
+        quizOptions.forEach(opt => {
+          opt.classList.remove('correct', 'incorrect');
+        });
+        
+        if (isCorrect) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('incorrect');
+          document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+        }
+      });
+    });
+    
+    document.getElementById('top-btn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    document.getElementById('quiz-btn').addEventListener('click', () => {
+      const quizSection = document.querySelector('.quiz-container');
+      if (quizSection) {
+        quizSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    
+    document.getElementById('summary-btn').addEventListener('click', () => {
+      alert('Rezumatul lecției:\n\n1. Introducere în arene\n2. Structura nucleului benzenic\n3. Izomeria derivaților\n4. Proprietăți fizice\n5. Proprietăți chimice');
+    });
+
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById("zoomedImage");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const zoomableImages = document.querySelectorAll('.zoomable');
+
+    zoomableImages.forEach(img => {
+      img.addEventListener('click', function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        modalImg.alt = this.alt;
+      });
+    });
+
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = "none";
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

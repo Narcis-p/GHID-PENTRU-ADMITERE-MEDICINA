@@ -1,0 +1,147 @@
+body {
+    background: linear-gradient(270deg, #cb7fab, #f5dc90);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite, fadeIn 1s ease-out;
+    overflow-x: hidden;
+    color: white;
+    min-height: 100vh;
+    position: relative;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulseBright {
+    0% { filter: brightness(0.8); }
+    50% { filter: brightness(1.1); }
+    100% { filter: brightness(0.8); }
+}
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color 0.5s ease;
+    z-index: -1;
+}
+
+.lectii-container {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lectii-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    color: white;
+    margin: 50px 0 30px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.lectii-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+}
+
+.lectie-card {
+    background-color: var(--card-color);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 15px;
+    padding: 30px;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.lectie-card:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    animation: pulseBright 4s ease infinite;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    transition: background 0.4s ease;
+}
+
+.lectie-card:hover .card-overlay {
+    background: rgba(0,0,0,0.1);
+}
+
+.lectie-card h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: white;
+    font-size: 1.4rem;
+    position: relative;
+    z-index: 2;
+}
+
+.home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.home-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateX(-5px) scale(1.05);
+}
+
+@media (max-width: 1200px) {
+    .lectii-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .lectii-grid {
+        grid-template-columns: 1fr;
+    }
+    .lectie-card {
+        min-height: 180px;
+    }
+    .lectii-title {
+        font-size: 2rem;
+    }
+}

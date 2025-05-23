@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chimie Organică - Alcanii | Smartys Med</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #7eb9ad;
+      --secondary: #f1c40f;
+      --accent: #2c3e50;
+      --dark: #5a9c8e;
+      --light: #ecf0f1;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--primary));
+      color: var(--light);
+      animation: fadeIn 1s ease-in-out;
+      line-height: 1.6;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      padding: 25px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+      background: linear-gradient(to right, var(--secondary), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    a.home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    a.home-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(-3px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    h2, h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2:after, h3:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(to right, var(--secondary), transparent);
+      border-radius: 3px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    li:before {
+      content: '•';
+      color: var(--secondary);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .interactive-box {
+      background: rgba(126, 185, 173, 0.3);
+      border-left: 4px solid var(--secondary);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+
+    .interactive-box h4 {
+      margin-top: 0;
+      color: var(--secondary);
+    }
+
+    .quiz-container {
+      background: rgba(241, 196, 15, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-option {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .quiz-option.correct {
+      background: rgba(76, 175, 80, 0.7);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(244, 67, 54, 0.7);
+    }
+
+    .tab-container {
+      margin: 30px 0;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      color: var(--secondary);
+    }
+
+    .tab-btn.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .diagram {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
+    .diagram img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 2px solid var(--secondary);
+      cursor: zoom-in;
+      transition: transform 0.3s;
+    }
+
+    .diagram img.zoomed {
+      transform: scale(1.8);
+      cursor: zoom-out;
+      z-index: 100;
+      position: relative;
+    }
+
+    .memory-tip {
+      background: rgba(44, 62, 80, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .memory-tip i {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #ddd;
+      background: rgba(0,0,0,0.3);
+      margin-top: 50px;
+    }
+
+    .floating-btns {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .floating-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+      background: var(--secondary);
+    }
+
+    
+    .flashcards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .flashcard {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 150px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .flashcard-front, .flashcard-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .flashcard-front {
+      background: rgba(126, 185, 173, 0.5);
+      z-index: 2;
+    }
+
+    .flashcard-back {
+      background: rgba(44, 62, 80, 0.5);
+      transform: rotateY(180deg);
+    }
+    
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard h4 {
+      margin-top: 0;
+      color: var(--secondary);
+      text-align: center;
+    }
+
+    .flashcard p {
+      text-align: center;
+    }
+
+    .flashcard-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      .flashcards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      margin-top: 5vh;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: var(--secondary);
+    }
+
+    .chem-formula {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .chem-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .chem-table th, .chem-table td {
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .chem-table th {
+      background-color: rgba(126, 185, 173, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="lectii.html" class="home-btn"><i class="fas fa-arrow-left"></i> Inapoi</a>
+
+  <header>
+    <h1>Chimie Organică - Alcanii</h1>
+    <p class="header-subtitle">Hidrocarburi saturate cu legături simple</p>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Introducere în chimia organică</h2>
+      
+      <p>Alcanii sunt hidrocarburile în care nu apar decât legături simple de tipul C─C și C─H și la care raportul numeric dintre cele două tipuri de atomi este exprimat prin formula CnH2n+2, unde n reprezintă numărul atomilor de carbon.</p>
+      
+      <div class="interactive-box">
+        <h4>Seria omoloagă a alcanilor</h4>
+        <p>Dacă i se dau lui n valori naturale succesive (șirul natural al numerelor) se obține seria omoloagă a alcanilor.</p>
+      </div>
+      
+      <div class="chem-table">
+        <table>
+          <tr>
+            <th>n</th>
+            <th>Formula moleculară</th>
+            <th>Denumire</th>
+            <th>Formula structurală</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>CH<sub>4</sub></td>
+            <td>Metan</td>
+            <td>CH<sub>4</sub></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>C<sub>2</sub>H<sub>6</sub></td>
+            <td>Etan</td>
+            <td>CH<sub>3</sub>─CH<sub>3</sub></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>C<sub>3</sub>H<sub>8</sub></td>
+            <td>Propan</td>
+            <td>CH<sub>3</sub>─CH<sub>2</sub>─CH<sub>3</sub></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>C<sub>4</sub>H<sub>10</sub></td>
+            <td>Butan</td>
+            <td>CH<sub>3</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>3</sub></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>C<sub>5</sub>H<sub>12</sub></td>
+            <td>Pentan</td>
+            <td>CH<sub>3</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>3</sub></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>C<sub>6</sub>H<sub>14</sub></td>
+            <td>Hexan</td>
+            <td>CH<sub>3</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>3</sub></td>
+          </tr>
+        </table>
+      </div>
+      
+      <p>Toți acești alcani au catene liniare. La alcanii cu patru atomi de carbon sau mai mulți poate apărea ramificarea lanțului. De aceea, denumirea alcanilor liniari este completată cu prefixul "normal" iar denumirea alcanilor ramificați se completează cu prefixul "izo".</p>
+      
+      <div class="diagram">
+        <img src="https://view.livresq.com/view/60990d18d93e2a00078f6483/data/static/media/80b52d90a5fc568a964c0cb003bddfdf35aed7ed.jpg?b=190921" alt="Structura alcanilor" class="zoomable">
+      </div>
+    </section>
+
+    <section>
+      <h2>Izomeri de catenă</h2>
+      
+      <p>Atomii din catenele de metan, etan, propan, nu se pot aranja decât în câte un singur mod. Pentru butan există două modalități:</p>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-atom flashcard-icon"></i>
+            <h4>Butan</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>CH<sub>3</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>3</sub></p>
+            <p>Catenă liniară</p>
+            <p>Punct de fierbere: -0.5°C</p>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-project-diagram flashcard-icon"></i>
+            <h4>Izobutan</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>CH<sub>3</sub>─CH(CH<sub>3</sub>)─CH<sub>3</sub></p>
+            <p>Catenă ramificată</p>
+            <p>Punct de fierbere: -11.7°C</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="memory-tip">
+        <i class="fas fa-lightbulb"></i>
+        <div>
+          <h4>Pont pentru memorare:</h4>
+          <p>"Toți izomerii unei substanțe au aceeași formulă moleculară dar sunt substanțe chimice diferite"</p>
+        </div>
+      </div>
+      
+      <h3>Reguli de denumire pentru izomeri</h3>
+      <p>Izomerii de catenă ai alcanilor se denumesc după următoarea regulă:</p>
+      <ul>
+        <li>Se stabilește cea mai lungă catenă liniară</li>
+        <li>Se numerotează de la un capăt atomii de C astfel încât catena laterală să ocupe poziția cu numărul cel mai mic</li>
+        <li>Se denumesc radicalii catenelor laterale și se indică poziția lor prin cifre</li>
+        <li>Citirea radicalilor se face în ordine alfabetică (etilul înaintea metilului)</li>
+        <li>Dacă sunt mai mulți radicali identici se folosesc prefixe: di-, tri-, etc.</li>
+      </ul>
+        <p>Exemplu: 2,2-dimetilbutan</p>
+      
+      <div class="interactive-box">
+        <h4>Radicali alchil</h4>
+        <p>Dacă din molecula unui alcan se îndepărtează un atom de hidrogen rezultă un radical alchil:</p>
+        <div class="chem-formula">
+          CH<sub>3</sub>─ (metil)<br>
+          ─CH<sub>2</sub>─ (metilen)<br>
+          ─CH─ (metin)<br>
+          CH<sub>3</sub>─CH<sub>2</sub>─CH<sub>2</sub>─ (propil)
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Proprietăți fizice</h2>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="stare">Stare de agregare</button>
+          <button class="tab-btn" data-tab="puncte">Puncte de topire/fierbere</button>
+          <button class="tab-btn" data-tab="solubilitate">Solubilitate</button>
+        </div>
+        
+        <div class="tab-content active" id="stare">
+          <ul>
+            <li><strong>C<sub>1</sub>-C<sub>4</sub></strong>: gazoși (metan, etan, propan, butan)</li>
+            <li><strong>C<sub>5</sub>-C<sub>15</sub></strong>: lichizi (pentan, hexan, heptan etc.)</li>
+            <li><strong>C<sub>16</sub>+</strong>: solizi (parafina)</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="puncte">
+          <ul>
+            <li>Punctele de topire și fierbere cresc odată cu creșterea numărului de atomi de carbon</li>
+            <li>Ramificarea determină micșorarea punctului de fierbere</li>
+            <li>Exemplu: butan (-0.5°C) vs. izobutan (-11.7°C)</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="solubilitate">
+          <ul>
+            <li>Sunt insolubili în apă (apolari)</li>
+            <li>Sunt solubili în solvenți organici apolari (eter, benzen)</li>
+            <li>Densitatea lor este mai mică decât a apei</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="interactive-box">
+        <h4>Mirosul alcanilor</h4>
+        <p>Deoarece alcanii gazoși nu au miros, pentru depistarea scăpărilor de gaze din conducte și de la aragaz se folosesc compuși cu miros respingător, de avertizare, numiți mercaptani.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Proprietăți chimice</h2>
+      
+      <p>Denumirea de parafine provine de la „parum affinis”- afinitate (chimică) mică, adică au reactivitate chimică scăzută.</p>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-exchange-alt flashcard-icon"></i>
+            <h4>Substituție</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Halogenarea → derivați halogenați</p>
+            <div class="chem-formula">
+              R─H + X<sub>2</sub> → R─X + HX
+            </div>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-random flashcard-icon"></i>
+            <h4>Izomerizare</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Are loc la 50-100°C cu catalizatori (AlBr<sub>3</sub>, AlCl<sub>3</sub>)</p>
+            <p>Descoperită de chimistul român C.D. Nenițescu</p>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-fire flashcard-icon"></i>
+            <h4>Oxidare</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Oxidări incomplete:</p>
+            <div class="chem-formula">
+              CH<sub>4</sub> + 1/2O<sub>2</sub> → CH<sub>3</sub>OH (metanol)<br>
+              CH<sub>4</sub> + O<sub>2</sub> → CH<sub>2</sub>O (formaldehidă)<br>
+              2CH<sub>4</sub> + O<sub>2</sub> → 2CO + 4H<sub>2</sub> (gaz de sinteză)
+            </div>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-burn flashcard-icon"></i>
+            <h4>Ardere</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Oxidare totală (combustie):</p>
+            <div class="chem-formula">
+              CH<sub>4</sub> + 2O<sub>2</sub> → CO<sub>2</sub> + 2H<sub>2</sub>O + Q
+            </div>
+            <p>Explică folosirea alcanilor ca combustibili</p>
+          </div>
+        </div>
+      </div>
+      
+      <h3>Descompunerea termică</h3>
+      <p>Alcanii prezintă stabilitate termică ridicată:</p>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="cracare">Cracare</button>
+          <button class="tab-btn" data-tab="dehidrogenare">Dehidrogenare</button>
+        </div>
+        
+        <div class="tab-content active" id="cracare">
+          <p>Descompunere la temperaturi mai mici:</p>
+          <div class="chem-formula">
+            CH<sub>3</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>3</sub> → CH<sub>4</sub> (metan) + CH<sub>2</sub>═CH─CH<sub>3</sub> (propenă)<br>
+            sau<br>
+            CH<sub>3</sub>─CH<sub>3</sub> (etan) + CH<sub>2</sub>═CH<sub>2</sub> (etenă)
+          </div>
+        </div>
+        
+        <div class="tab-content" id="dehidrogenare">
+          <p>Descompunere la temperaturi >650°C:</p>
+          <div class="chem-formula">
+            CH<sub>3</sub>─CH<sub>2</sub>─CH<sub>2</sub>─CH<sub>3</sub> → CH<sub>2</sub>═CH─CH<sub>2</sub>─CH<sub>3</sub> (1-butenă) + H<sub>2</sub><br>
+            sau<br>
+            CH<sub>3</sub>─CH═CH─CH<sub>3</sub> (2-butenă) + H<sub>2</sub>
+          </div>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Care este formula generală a alcanilor?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">C<sub>n</sub>H<sub>2n</sub></div>
+          <div class="quiz-option" data-correct="false">C<sub>n</sub>H<sub>2n-2</sub></div>
+          <div class="quiz-option" data-correct="true">C<sub>n</sub>H<sub>2n+2</sub></div>
+          <div class="quiz-option" data-correct="false">C<sub>n</sub>H<sub>n</sub></div>
+        </div>
+      </div>
+    </section>
+    
+    <section>
+      <h2>Surse de alcani</h2>
+      
+      <div class="interactive-box">
+        <h4>Principalele surse</h4>
+        <p>Principalele surse de alcani sunt gazele naturale și petrolul.</p>
+      </div>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-fire-extinguisher flashcard-icon"></i>
+            <h4>Gaze naturale</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Pot fi:</p>
+            <ul style="text-align: left;">
+              <li>Zăcăminte de gaz metan (CH<sub>4</sub>)</li>
+              <li>Gaze de sondă (gaze de petrol) care conțin alcani de la C<sub>1</sub> la C<sub>5</sub></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-gas-pump flashcard-icon"></i>
+            <h4>Petrolul</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Amestec complex de hidrocarburi:</p>
+            <ul style="text-align: left;">
+              <li>Gaz petrolier (C<sub>1</sub>-C<sub>4</sub>)</li>
+              <li>Benzină (C<sub>5</sub>-C<sub>10</sub>)</li>
+              <li>Kerosene (C<sub>11</sub>-C<sub>15</sub>)</li>
+              <li>Păcură, uleiuri (C<sub>16</sub>+)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="zoomedImage">
+  </div>
+  
+  <div class="floating-btns">
+    <button class="floating-btn" id="summary-btn" title="Rezumat"><i class="fas fa-book"></i></button>
+    <button class="floating-btn" id="quiz-btn" title="Test rapid"><i class="fas fa-question"></i></button>
+    <button class="floating-btn" id="top-btn" title="Sus"><i class="fas fa-arrow-up"></i></button>
+  </div>
+
+  <footer>
+    bibliografie: "https://www.scientia.ro/stiinta-la-minut/64-scintilatii-stiintifice-chimie/1462-chimie-organica-alcanii.html"
+    <br>
+    "https://archive.org/details/vladescu-luminita-chimie.-manual-clasa-a-x-a-2005-scan/page/87/mode/2up?view=theater"
+  </footer>
+
+  <script>
+    
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+        
+        quizOptions.forEach(opt => {
+          opt.classList.remove('correct', 'incorrect');
+        });
+        
+        if (isCorrect) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('incorrect');
+          document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+        }
+      });
+    });
+    
+    document.getElementById('top-btn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    document.getElementById('quiz-btn').addEventListener('click', () => {
+      const quizSection = document.querySelector('.quiz-container');
+      if (quizSection) {
+        quizSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    
+    document.getElementById('summary-btn').addEventListener('click', () => {
+      alert('Rezumatul lecției:\n\n1. Introducere în alcanii\n2. Izomeri de catenă\n3. Proprietăți fizice\n4. Proprietăți chimice\n5. Surse de alcani');
+    });
+
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById("zoomedImage");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const zoomableImages = document.querySelectorAll('.zoomable');
+
+    zoomableImages.forEach(img => {
+      img.addEventListener('click', function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        modalImg.alt = this.alt;
+      });
+    });
+
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = "none";
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

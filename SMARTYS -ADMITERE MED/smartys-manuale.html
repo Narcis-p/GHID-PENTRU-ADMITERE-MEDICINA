@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartys - Manuale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        
+        .manuals-container {
+            padding: 100px 50px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .manuals-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: white;
+            text-align: center;
+        }
+        
+        .back-btn-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .manuals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .manual-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .manual-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .manual-icon {
+            font-size: 40px;
+            color: white;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .manual-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .manual-description {
+            font-size: 15px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        
+        .btn-manual {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #cb7fab;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-manual:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .manuals-container {
+                padding: 100px 20px 40px;
+            }
+            
+            .manuals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .manuals-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div style="display: flex; align-items: center; gap: 30px;">
+            <div class="logo" title="Smartys">
+                <div class="logo-symbol">
+                    <img src="img/logo-icon.png" alt="Smartys Logo" class="logo-icon">
+                </div>
+                <div class="logo-text">Smartys</div>
+            </div>
+
+            <div class="nav-links left">
+                <a href="lectii.html" id="lectiiLink">Lecții</a>
+                <a href="Smartys-grile.html" id="grileLink">Grile</a>
+                <a href="progress.html" id="progressLink">Progresul meu</a>
+                <a href="smartys-manuale.html" id="manualelink">Manuale</a>
+            </div>
+        </div>
+        <div class="nav-links right">
+            <span id="welcomeUser" style="margin-right: 15px; font-weight: bold;"></span>
+            <a href="Smartys-contact.html">Contact</a>
+            <a href="Smartys-login.html" id="loginBtn"><button class="btn-white">Log In</button></a>
+            <a href="Smartys-signup.html" id="signupBtn"><button class="btn-colored">Sign Up</button></a>
+            <button id="logoutBtn" class="btn-white" style="display: none;">Log Out</button>
+        </div>
+    </nav>
+
+    <div class="manuals-container">
+        <h1 class="manuals-title">Manuale de pregătire</h1>
+        
+        
+        <div class="back-btn-container">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Pagina principală
+            </a>
+        </div>
+        
+        <div class="manuals-grid">
+            <div class="manual-card">
+                <div class="manual-icon">
+                    <i class="fas fa-book-medical"></i>
+                </div>
+                <h3 class="manual-title">Corint</h3>
+                <p class="manual-description">Manual oficial de biologie pentru clasa a XI-a, editura Corint. Conține toate capitolele necesare pentru pregătirea la admiterea la medicină.</p>
+                <a href="https://manuale.edu.ro/manuale/Clasa%20a%20XI-a/Biologie/Corint1/A367.pdf" class="btn-manual" target="_blank">Vezi manualul</a>
+            </div>
+            
+            <div class="manual-card">
+                <div class="manual-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="manual-title">Barrons</h3>
+                <p class="manual-description">Ghid Barron's pentru admitere la facultățile de medicină. Resursă esențială pentru înțelegerea sistemelor umane.</p>
+                <a href="https://www.academia.edu/102525689/Anatomie_Si_Fiziologie_Umana_Pentru_Admitere_La_Facultatile_de_Medicina_Barron_s_p" class="btn-manual" target="_blank">Vezi manualul</a>
+            </div>
+            
+           <div class="manual-card">
+                <div class="manual-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3 class="manual-title">Chimie Organică clasa a X-a</h3>
+                <p class="manual-description">Manual complet de chimie organică adaptat cerințelor de admitere. Include scheme, reacții și exerciții practice.</p>
+                <a href="https://archive.org/details/vladescu-luminita-chimie.-manual-clasa-a-x-a-2005-scan/page/143/mode/2up" class="btn-manual">Vezi manualul</a>
+            </div>
+
+            <div class="manual-card">
+                <div class="manual-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3 class="manual-title">Chimie Organică clasa a XII-a</h3>
+                <p class="manual-description">Manual complet de chimie organică adaptat cerințelor de admitere. Include scheme, reacții și exerciții practice.</p>
+                <a href="https://manuale.edu.ro/manuale/Clasa%20a%20XI-a/Chimie/Akademos%20Art1/A095.pdf" class="btn-manual">Vezi manualul</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(270deg, #cb7fab, #f5dc90);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    overflow-x: hidden;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    background: white;
+    box-shadow: 0 0 0 2px rgba(203, 127, 171, 0.5);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #cb7fab;
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #b56d95;
+    transform: translateY(-2px);
+}
+
+.signup-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.signup-link a {
+    color: white;
+    text-decoration: underline;
+    transition: all 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #cb7fab;
+}
+
+.error-message {
+    color: #ff6b6b;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 14px;
+}
+

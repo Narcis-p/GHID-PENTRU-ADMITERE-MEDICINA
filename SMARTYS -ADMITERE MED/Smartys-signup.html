@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartys - Înregistrare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/signup.css">
+    <script src="js/signup.js" defer></script>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Creează cont Smartys</h2>
+        <form id="signupForm">
+            <input type="text" id="newUsername" placeholder="Nume utilizator" required>
+            <input type="email" id="newEmail" placeholder="Adresă email" required>
+            <input type="password" id="newPassword" placeholder="Parolă (minim 6 caractere)" required minlength="6">
+            <div id="signupError" class="error-message"></div>
+            <button type="submit">Creează cont</button>
+        </form>
+        <div class="login-link">
+            Ai deja cont? <a href="Smartys-login.html">Autentifică-te</a>
+        </div>
+    </div>
+</body>
+</html>

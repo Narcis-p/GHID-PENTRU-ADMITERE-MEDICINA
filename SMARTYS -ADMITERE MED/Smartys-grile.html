@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartys - Grile Admitere Medicină</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/grile.css">
+</head>
+<body>
+    <a href="index.html" class="home-btn">
+        <i class="fas fa-arrow-left"></i> Acasă
+    </a>
+
+    <div class="auth-message" id="auth-message">
+        <div class="message-box">
+            <h2>Acces restricționat</h2>
+            <p>Pentru a accesa grilele, te rugăm să te autentifici sau să creezi un cont.</p>
+            <div class="auth-actions">
+                <a href="Smartys-login.html" class="btn-auth">Autentificare</a>
+                <a href="Smartys-signup.html" class="btn-auth btn-signup">Înregistrare</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="grile-container" id="grile-container">
+        <h1>Grile Admitere Medicină</h1>
+        <p class="subtitle">Testează-ți cunoștințele cu grile din ultimii ani</p>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label for="chapter-filter">Capitol:</label>
+                <select id="chapter-filter" class="filter-select">
+                    <option value="all">Toate capitolele</option>
+                    <option value="nervos">Sistemul Nervos</option>
+                    <option value="osos">Sistemul Osos</option>
+                    <option value="alcatuire">Alcătuirea Corpului Uman</option>
+                    <option value="respirator">Sistemul Respirator</option>
+                    <option value="digestiv">Sistemul Digestiv</option>
+                    <option value="chimie">Chimie</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="university-filter">Universitate:</label>
+                <select id="university-filter" class="filter-select">
+                    <option value="all">Toate universitățile</option>
+                    <option value="umfcd">UMF Carol Davila</option>
+                    <option value="umfiasi">UMF Iași</option>
+                    <option value="umfcluj">UMF Cluj</option>
+                    <option value="umftgm">UMF Târgu Mureș</option>
+                    <option value="umfcv">UMF Craiova</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="year-filter">An:</label>
+                <select id="year-filter" class="filter-select">
+                    <option value="all">Toți anii</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="quiz-container" id="quiz-container">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Se încarcă întrebările...</p>
+            </div>
+        </div>
+
+        <div class="results-container" id="results-container" style="display: none;">
+            <h2>Rezultatul tău</h2>
+            <div class="score-display" id="score-display"></div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="feedback" id="feedback"></div>
+            <button class="btn-restart" id="restart-btn">Începe un nou test</button>
+        </div>
+    </div>
+
+    <script src="js/grile.js"></script>
+</body>
+</html>

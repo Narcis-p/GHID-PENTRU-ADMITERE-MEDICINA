@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistemul Respirator - Smartys Med</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #3498db;
+      --secondary: #f1c40f;
+      --accent: #2c3e50;
+      --dark: #2980b9;
+      --light: #ecf0f1;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--primary));
+      color: var(--light);
+      animation: fadeIn 1s ease-in-out;
+      line-height: 1.6;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      padding: 25px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+      background: linear-gradient(to right, var(--secondary), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    a.home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    a.home-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(-3px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    h2, h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2:after, h3:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(to right, var(--secondary), transparent);
+      border-radius: 3px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    li:before {
+      content: '•';
+      color: var(--secondary);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .interactive-box {
+      background: rgba(52, 152, 219, 0.3);
+      border-left: 4px solid var(--secondary);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+
+    .interactive-box h4 {
+      margin-top: 0;
+      color: var(--secondary);
+    }
+
+    .quiz-container {
+      background: rgba(241, 196, 15, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-option {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .quiz-option.correct {
+      background: rgba(76, 175, 80, 0.7);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(244, 67, 54, 0.7);
+    }
+
+    .tab-container {
+      margin: 30px 0;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      color: var(--secondary);
+    }
+
+    .tab-btn.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .diagram {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
+    .diagram img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 2px solid var(--secondary);
+      cursor: zoom-in;
+      transition: transform 0.3s;
+    }
+
+    .diagram img.zoomed {
+      transform: scale(1.8);
+      cursor: zoom-out;
+      z-index: 100;
+      position: relative;
+    }
+
+    .memory-tip {
+      background: rgba(44, 62, 80, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .memory-tip i {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #ddd;
+      background: rgba(0,0,0,0.3);
+      margin-top: 50px;
+    }
+
+    .floating-btns {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .floating-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+      background: var(--secondary);
+    }
+
+    
+    .flashcards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .flashcard {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 150px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .flashcard-front, .flashcard-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .flashcard-front {
+      background: rgba(52, 152, 219, 0.5);
+      z-index: 2;
+    }
+
+    .flashcard-back {
+      background: rgba(44, 62, 80, 0.5);
+      transform: rotateY(180deg);
+    }
+    
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard h4 {
+      margin-top: 0;
+      color: var(--secondary);
+      text-align: center;
+    }
+
+    .flashcard p {
+      text-align: center;
+    }
+
+    .flashcard-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      .flashcards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      margin-top: 5vh;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: var(--secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="lectii.html" class="home-btn"><i class="fas fa-arrow-left"></i> Inapoi</a>
+
+  <header>
+    <h1>Sistemul Respirator</h1>
+    <p class="header-subtitle">Procesul de respirație și patologii asociate</p>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Introducere în sistemul respirator</h2>
+      
+      <p>Respirația este procesul prin care la nivel celular au loc, în prezența oxigenului, procese de oxido-reducere a substanțelor organice, cu eliberări de energie, dioxid de carbon și apă.</p>
+      <p>Totalitatea organelor prin care se face schimbul de gaze dintre aerul atmosferic și organism alcătuiesc sistemul respirator.</p>
+      
+      <div class="interactive-box">
+        <h4>Componentele sistemului respirator</h4>
+        <p>Sistemul respirator este alcătuit din:</p>
+        <ul>
+          <li><strong>Căi respiratorii</strong>: fose nazale, faringe, laringe, trahee și bronhii principale (primare)</li>
+          <li><strong>Plămâni</strong></li>
+        </ul>
+        <p>Unitățile funcționale ale plămânilor, la nivelul cărora se realizează schimburile de gaze respiratorii, sunt alveolele pulmonare.</p>
+      </div>
+      
+      <div class="diagram">
+        <img src="https://edu.litera.ro/manuale/2023_BIO6/pagini/pagina59/img/img1.png" alt="Sistemul respirator" class="zoomable">
+      </div>
+    </section>
+
+    <section>
+      <h2>Ventilația pulmonară</h2>
+      
+      <p>Ventilația pulmonară este procesul prin care se realizează schimbul de gaze respiratorii dintre organism și mediul extern. Cuprinde două etape: inspirația și expirația.</p>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-lungs flashcard-icon"></i>
+            <h4>Inspirația</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Proces activ care presupune introducerea aerului în plămâni:</p>
+            <ul style="text-align: left;">
+              <li>Se realizează prin contracția mușchilor intercostali și a mușchiului diafragmă</li>
+              <li>Determină mărirea volumului cutiei toracice</li>
+              <li>Presiunea intrapulmonară scade cu 2-3 mm Hg</li>
+              <li>Aerul intră în plămâni</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-wind flashcard-icon"></i>
+            <h4>Expirația</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Proces pasiv care presupune eliminarea aerului din plămâni:</p>
+            <ul style="text-align: left;">
+              <li>Se realizează prin relaxarea mușchilor intercostali externi și a mușchiului diafragmă</li>
+              <li>Determină micșorarea volumului cutiei toracice</li>
+              <li>Presiunea intrapulmonară crește cu 2-3 mm Hg</li>
+              <li>Aerul iese din plămâni</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="memory-tip">
+        <i class="fas fa-lightbulb"></i>
+        <div>
+          <h4>Diferențe cheie:</h4>
+          <p>Inspirația este un proces activ (necesită contracție musculară), în timp ce expirația în repaus este un proces pasiv (se realizează prin relaxarea mușchilor).</p>
+        </div>
+      </div>
+      
+      <div class="diagram">
+        <img src="https://paginadenursing.ro/wp-content/uploads/2020/10/inspiratia-si-expiratia.jpg" alt="Ventilația pulmonară" class="zoomable">
+      </div>
+    </section>
+
+    <section>
+      <h2>Schimbul de gaze respiratorii și transportul acestora</h2>
+      
+      <p>Schimburile de gaze respiratorii cuprind trei etape: etapa pulmonară, etapa sangvină și etapa celulară.</p>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="pulmonara">Etapa pulmonară</button>
+          <button class="tab-btn" data-tab="sangvina">Etapa sangvină</button>
+          <button class="tab-btn" data-tab="celulara">Etapa celulară</button>
+        </div>
+        
+        <div class="tab-content active" id="pulmonara">
+          <h4>Schimbul de gaze la nivel pulmonar</h4>
+          <ul>
+            <li>Se realizează la nivelul membranei alveolo-capilare</li>
+            <li>Oxigenul trece din aerul alveolar în sângele capilar (presiune 100 mm Hg → 40 mm Hg)</li>
+            <li>Dioxidul de carbon trece din sângele capilar în aerul alveolar (presiune 47 mm Hg → 40 mm Hg)</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="sangvina">
+          <h4>Transportul gazelor prin sânge</h4>
+          <p><strong>Oxigenul</strong> se transportă sub două forme:</p>
+          <ul>
+            <li>Dizolvat în plasmă (1%)</li>
+            <li>Sub formă de combinație cu hemoglobina, numită oxihemoglobină (99%)</li>
+          </ul>
+          
+          <p><strong>Dioxidul de carbon</strong> se transportă sub trei forme:</p>
+          <ul>
+            <li>Dizolvat în plasmă (8%)</li>
+            <li>Sub formă de bicarbonați de sodiu și potasiu (80%)</li>
+            <li>Sub formă de combinație cu hemoglobina, numită carbohemoglobină (12%)</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="celulara">
+          <h4>Schimbul de gaze la nivel celular</h4>
+          <ul>
+            <li>Oxigenul trece din sângele capilar în lichidul interstitial și celule (97 mm Hg → 40 mm Hg)</li>
+            <li>Dioxidul de carbon trece din celule în lichidul interstitial și sângele capilar (47 mm Hg → 40 mm Hg)</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Ce formă de transport a oxigenului este predominantă în sânge?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Dizolvat în plasmă</div>
+          <div class="quiz-option" data-correct="true">Oxihemoglobină</div>
+          <div class="quiz-option" data-correct="false">Carbohemoglobină</div>
+          <div class="quiz-option" data-correct="false">Bicarbonați</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Noțiuni elementare de igienă și patologie ale sistemului respirator</h2>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="gripa">Gripa</button>
+          <button class="tab-btn" data-tab="fibroza">Fibroza pulmonară</button>
+          <button class="tab-btn" data-tab="emfizem">Emfizem pulmonar</button>
+        </div>
+        
+        <div class="tab-content active" id="gripa">
+          <h4>Gripa</h4>
+          <p>Boală infecțio-contagioasă produsă de virusul gripal.</p>
+          
+          <div class="interactive-box">
+            <h5>Cauze</h5>
+            <p>Infectarea cu virusul gripal</p>
+            
+            <h5>Simptome</h5>
+            <p>Febră, dureri musculare, dureri de cap, inflamația căilor respiratorii superioare, insomnii.</p>
+            
+            <h5>Prevenire</h5>
+            <p>Călirea organismului pentru mărirea rezistenței la îmbolnăviri, evitarea aglomerărilor, imunizarea cu vaccin antigripal.</p>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="fibroza">
+          <h4>Fibroza pulmonară</h4>
+          <p>Se caracterizează prin cicatrizarea țesutului pulmonar datorită producerii în exces de țesut conjunctiv.</p>
+          
+          <div class="interactive-box">
+            <h5>Cauze</h5>
+            <p>Iradierea terapeutică pentru tumori, expunerea la toxine și poluanți, chimioterapia, fumatul.</p>
+            
+            <h5>Simptome</h5>
+            <p>Dificultate în respirație, insuficiență respiratorie și cardiacă, tuse uscată, oboseală, dureri musculare.</p>
+            
+            <h5>Prevenire</h5>
+            <p>Evitarea fumatului pasiv sau activ, respectarea normelor de protecție a muncii, purtarea echipamentului de protecție la locul de muncă.</p>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="emfizem">
+          <h4>Emfizem pulmonar</h4>
+          <p>Afectiune caracterizată prin acumularea de aer în țesutul pulmonar interstitial.</p>
+          
+          <div class="interactive-box">
+            <h5>Cauze</h5>
+            <p>Apare în urma unor boli cronice (TBC, bronșite), în cazul unor profesii ca: sticlători, suflători, instrumentiști.</p>
+            
+            <h5>Simptome</h5>
+            <p>Scăderea elasticității pulmonare, dilatarea alveolelor, creșterea volumului de aer rezidual, tuse.</p>
+            
+            <h5>Prevenire</h5>
+            <p>Evitarea fumatului pasiv sau activ, purtarea echipamentului de protecție la locul de muncă, alimentație bogată în vitamine.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Care dintre următoarele afecțiuni este cauzată de virus?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true">Gripa</div>
+          <div class="quiz-option" data-correct="false">Fibroza pulmonară</div>
+          <div class="quiz-option" data-correct="false">Emfizem pulmonar</div>
+          <div class="quiz-option" data-correct="false">Toate cele de mai sus</div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="zoomedImage">
+  </div>
+  
+  <div class="floating-btns">
+    <button class="floating-btn" id="summary-btn" title="Rezumat"><i class="fas fa-book"></i></button>
+    <button class="floating-btn" id="quiz-btn" title="Test rapid"><i class="fas fa-question"></i></button>
+    <button class="floating-btn" id="top-btn" title="Sus"><i class="fas fa-arrow-up"></i></button>
+  </div>
+
+  <footer>
+    Bibliografie: https://bacbioro.weebly.com/respiratia.html
+    <br>
+    "https://manuale.edu.ro/manuale/Clasa%20a%20XI-a/Biologie/Corint1/A367.pdf"
+    <br>
+    "https://www.academia.edu/113790493/Barrons_2022_Anatomy_and_Physiology_for_Dummies"
+  </footer>
+
+  <script>
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+        
+        quizOptions.forEach(opt => {
+          opt.classList.remove('correct', 'incorrect');
+        });
+        
+        if (isCorrect) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('incorrect');
+          document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+        }
+      });
+    });
+    
+    document.getElementById('top-btn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    document.getElementById('quiz-btn').addEventListener('click', () => {
+      const quizSection = document.querySelector('.quiz-container');
+      if (quizSection) {
+        quizSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    
+    document.getElementById('summary-btn').addEventListener('click', () => {
+      alert('Rezumatul lecției:\n\n1. Componentele sistemului respirator\n2. Ventilația pulmonară (inspirație și expirație)\n3. Schimbul și transportul gazelor respiratorii\n4. Afecțiuni ale sistemului respirator');
+    });
+
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById("zoomedImage");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const zoomableImages = document.querySelectorAll('.zoomable');
+
+    zoomableImages.forEach(img => {
+      img.addEventListener('click', function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        modalImg.alt = this.alt;
+      });
+    });
+
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = "none";
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

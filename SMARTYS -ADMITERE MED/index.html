@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartys - Admitere Medicină</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <nav>
+        <div style="display: flex; align-items: center; gap: 30px;">
+            <div class="logo" title="Smartys" a href="index.html">
+                <div class="logo-symbol">
+                    <img src="img/logo-icon.png" alt="Smartys Logo" class="logo-icon">
+                </div>
+                <div class="logo-text">Smartys</div>
+            </div>
+
+            <div class="nav-links left">
+                <a href="lectii.html" id="lectiiLink">Lecții</a>
+                <a href="Smartys-grile.html" id="grileLink">Grile</a>
+                <a href="progress.html" id="progressLink">Progresul meu</a>
+                <a href="smartys-manuale.html" id="'manualelink">Manuale</a>
+            </div>
+        </div>
+        <div class="nav-links right">
+            <span id="welcomeUser" style="margin-right: 15px; font-weight: bold;"></span>
+            <a href="Smartys-contact.html">Contact</a>
+            <a href="Smartys-login.html" id="loginBtn"><button class="btn-white">Log In</button></a>
+            <a href="Smartys-signup.html" id="signupBtn"><button class="btn-colored">Sign Up</button></a>
+            <button id="logoutBtn" class="btn-white" style="display: none;">Log Out</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Admiterea la Medicină</h1>
+        <p>Platforma ta de pregătire pentru succesul în lumea medicală.</p>
+        <div class="quote" id="quote"></div>
+    </div>
+
+    
+    <section id="lectii" class="restricted-section" style="display: none;">
+        <div class="container">
+            <h2>Lecții</h2>
+            <div class="lessons-grid">
+            </div>
+        </div>
+    </section>
+
+    <div class="cursor-effect" id="cursor"></div>
+    <canvas id="confetti-canvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index: 1000;"></canvas>
+</body>
+</html>

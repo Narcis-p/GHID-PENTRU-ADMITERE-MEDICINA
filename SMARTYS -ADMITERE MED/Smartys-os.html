@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistemul Osos - Smartys Med</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #e74c3c;
+      --secondary: #f1c40f;
+      --accent: #8a5a44;
+      --dark: #7b241c;
+      --light: #fdebd0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--primary));
+      color: var(--light);
+      animation: fadeIn 1s ease-in-out;
+      line-height: 1.6;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      padding: 25px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+      background: linear-gradient(to right, var(--secondary), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    a.home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    a.home-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(-3px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    h2, h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2:after, h3:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(to right, var(--secondary), transparent);
+      border-radius: 3px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    li:before {
+      content: '•';
+      color: var(--secondary);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .interactive-box {
+      background: rgba(231, 76, 60, 0.3);
+      border-left: 4px solid var(--secondary);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+
+    .interactive-box h4 {
+      margin-top: 0;
+      color: var(--secondary);
+    }
+
+    .quiz-container {
+      background: rgba(241, 196, 15, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-option {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .quiz-option.correct {
+      background: rgba(76, 175, 80, 0.7);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(244, 67, 54, 0.7);
+    }
+
+    .tab-container {
+      margin: 30px 0;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      color: var(--secondary);
+    }
+
+    .tab-btn.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .bone-diagram {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
+    .bone-diagram img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 2px solid var(--secondary);
+      cursor: zoom-in;
+      transition: transform 0.3s;
+    }
+
+    .bone-diagram img.zoomed {
+      transform: scale(1.8);
+      cursor: zoom-out;
+      z-index: 100;
+      position: relative;
+    }
+
+    .memory-tip {
+      background: rgba(138, 90, 68, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .memory-tip i {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #ddd;
+      background: rgba(0,0,0,0.3);
+      margin-top: 50px;
+    }
+
+    .floating-btns {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .floating-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+      background: var(--secondary);
+    }
+
+    /* Flashcard styles */
+    .flashcards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .flashcard {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 150px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .flashcard-front, .flashcard-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .flashcard-front {
+      background: rgba(231, 76, 60, 0.5);
+      z-index: 2;
+    }
+
+    .flashcard-back {
+      background: rgba(138, 90, 68, 0.5);
+      transform: rotateY(180deg);
+    }
+    
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard h4 {
+      margin-top: 0;
+      color: var(--secondary);
+      text-align: center;
+    }
+
+    .flashcard p {
+      text-align: center;
+    }
+
+    .flashcard-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      .flashcards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Modal for zoomed images */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      margin-top: 5vh;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: var(--secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="lectii.html" class="home-btn"><i class="fas fa-arrow-left"></i> Inapoi</a>
+
+  <header>
+    <h1>Sistemul Osos</h1>
+    <p class="header-subtitle">Ghid complet pentru admiterea la Medicină</p>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Anatomia sistemului osos</h2>
+      
+      <p>Sistemul osos este alcătuit din totalitatea oaselor care intră în componenta organismului. Reprezintă partea pasivă a sistemului locomotor care realizează mișcarea. Oasele legate între ele prin articulații formează scheletul.</p>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-skull flashcard-icon"></i>
+            <h4>Scheletul capului</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Format din 22 de oase:</p>
+            <ul style="text-align: left;">
+              <li>Neurocraniu (8 oase)</li>
+              <li>Viscerocraniu (14 oase)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-bone flashcard-icon"></i>
+            <h4>Scheletul trunchiului</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Componente principale:</p>
+            <ul style="text-align: left;">
+              <li>Coloana vertebrală</li>
+              <li>Coaste</li>
+              <li>Stern</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-running flashcard-icon"></i>
+            <h4>Scheletul membrelor</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Componente:</p>
+            <ul style="text-align: left;">
+              <li>Membre superioare</li>
+              <li>Membre inferioare</li>
+              <li>Centuri scapulară și pelvină</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Câte oase formează scheletul capului?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">14 oase</div>
+          <div class="quiz-option" data-correct="true">22 de oase</div>
+          <div class="quiz-option" data-correct="false">30 de oase</div>
+          <div class="quiz-option" data-correct="false">8 oase</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Structura detaliată a scheletului</h2>
+      
+      <div class="memory-tip">
+        <i class="fas fa-lightbulb"></i>
+        <div>
+          <h4>Pont pentru memorare:</h4>
+          <p>"Neurocraniul are 8 oase - 4 perechi și 4 neperechi"</p>
+        </div>
+      </div>
+      
+      <h3>1. Scheletul capului</h3>
+      <ul>
+        <li><strong>Neurocraniul (cutia craniană)</strong>:
+          <ul>
+            <li>4 oase neperechi: frontal, etmoid, sfenoid, occipital</li>
+            <li>2 perechi: temporale, parietale</li>
+          </ul>
+        </li>
+        <li><strong>Viscerocraniul</strong>:
+          <ul>
+            <li>2 oase neperechi: vomer, mandibulă</li>
+            <li>6 perechi: maxilare, palatine, nazale, lacrimale, zigomatice, cornete nazale inferioare</li>
+          </ul>
+        </li>
+      </ul>
+      
+      <div class="bone-diagram">
+        <img src="https://bacbioro.weebly.com/uploads/2/8/4/0/28403079/4224709_orig.jpg" alt="Craniu uman" class="zoomable">
+      </div>
+      
+      <h3>2. Scheletul trunchiului</h3>
+      <ul>
+        <li><strong>Coloana vertebrală</strong>:
+          <ul>
+            <li>7 vertebre cervicale</li>
+            <li>12 vertebre toracice</li>
+            <li>5 vertebre lombare</li>
+            <li>5 vertebre sacrale</li>
+            <li>4-5 vertebre coccigiene</li>
+          </ul>
+        </li>
+        <li><strong>Coaste</strong>: 12 perechi (7 adevărate, 3 false, 2 flotante)</li>
+        <li><strong>Stern</strong>: manubriu, corp, apendice xifoid</li>
+      </ul>
+      
+      <div class="bone-diagram">
+        <img src="https://bacbioro.weebly.com/uploads/2/8/4/0/28403079/3568849_orig.gif" alt="Coloana vertebrală" class="zoomable">
+      </div>
+      
+      <div class="bone-diagram">
+        <img src="https://bacbioro.weebly.com/uploads/2/8/4/0/28403079/7907354.jpg?237" alt="Scheletul toracic" class="zoomable">
+      </div>
+      
+      <h3>3. Scheletul membrelor</h3>
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="membre-superioare">Membre superioare</button>
+          <button class="tab-btn" data-tab="membre-inferioare">Membre inferioare</button>
+        </div>
+        
+        <div class="tab-content active" id="membre-superioare">
+          <ul>
+            <li><strong>Centura scapulară</strong>: omoplat, claviculă</li>
+            <li><strong>Membrul liber</strong>:
+              <ul>
+                <li>Brat: humerus</li>
+                <li>Antebrat: radius, cubitus</li>
+                <li>Mână: carpiene (8), metacarpiene (5), falange (14)</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="membre-inferioare">
+          <ul>
+            <li><strong>Centura pelvină</strong>: os coxal (ilion, ischion, pubis)</li>
+            <li><strong>Membrul liber</strong>:
+              <ul>
+                <li>Coapsă: femur</li>
+                <li>Gambă: tibie, fibulă</li>
+                <li>Picior: tarsiene (7), metatarsiene (5), falange (14)</li>
+                <li>Rotulă (patelă)</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Funcțiile sistemului osos</h2>
+      
+      <div class="interactive-box">
+        <h4>Roluri cheie</h4>
+        <p>Sistemul osos are multiple funcții vitale în organism, de la susținere structurală la producția de celule sanguine.</p>
+      </div>
+      
+      <ul>
+        <li><strong>Susținere</strong>: oferă structură și formă corpului</li>
+        <li><strong>Protecție</strong>: protejează organele vitale (creier, inimă, plămâni)</li>
+        <li><strong>Locomoție</strong>: servește ca punct de inserție pentru mușchi</li>
+        <li><strong>Producție celule sanguine</strong>: prin măduva osoasă roșie</li>
+        <li><strong>Depozitare minerale</strong>: calciu, fosfor</li>
+        <li><strong>Echilibru acid-bazic</strong>: reglează pH-ul sanguin</li>
+      </ul>
+      
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Care dintre următoarele NU este o funcție a sistemului osos?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Protecția organelor vitale</div>
+          <div class="quiz-option" data-correct="false">Producția de celule sanguine</div>
+          <div class="quiz-option" data-correct="true">Producția de hormoni tiroidieni</div>
+          <div class="quiz-option" data-correct="false">Depozitarea calciului</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Dezvoltarea și creșterea oaselor</h2>
+      
+      <h3>Procesul de osificare</h3>
+      <ul>
+        <li><strong>Osificare membranacee</strong>: înlocuirea țesutului conjunctiv fibros cu țesut osos</li>
+        <li><strong>Osificare endocondrală</strong>: înlocuirea țesutului cartilaginos cu țesut osos</li>
+      </ul>
+      
+      <h3>Tipuri de creștere</h3>
+      <ul>
+        <li><strong>Creștere în lungime</strong>: prin cartilajele de creștere (la oasele lungi)</li>
+        <li><strong>Creștere în grosime</strong>: prin activitatea periostului (la toate oasele)</li>
+      </ul>
+      
+      <div class="memory-tip">
+        <i class="fas fa-lightbulb"></i>
+        <div>
+          <h4>Factori care influențează creșterea osoasă:</h4>
+          <p>Hormoni (hipofizari, tiroidieni, sexuali), vitamine (A, C, D), alimentație bogată în calciu și fosfor</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Patologii ale sistemului osos</h2>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="deformatii">Deformații</button>
+          <button class="tab-btn" data-tab="fracturi">Fracturi</button>
+          <button class="tab-btn" data-tab="alte">Alte afecțiuni</button>
+        </div>
+        
+        <div class="tab-content active" id="deformatii">
+          <h4>Deformații ale coloanei vertebrale:</h4>
+          <ul>
+            <li><strong>Cifoză</strong>: accentuarea curburii toracice ("cocoșată")</li>
+            <li><strong>Scolioză</strong>: deviere laterală a coloanei</li>
+            <li><strong>Loroză</strong>: accentuarea curburii lombare</li>
+            <li><strong>Piciorul plat</strong>: absența bolții plantare</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="fracturi">
+          <h4>Tipuri de fracturi:</h4>
+          <ul>
+            <li><strong>Fracturi închise</strong>: pielea intactă</li>
+            <li><strong>Fracturi deschise</strong>: osul iese prin piele</li>
+            <li><strong>Entorse</strong>: întindere/rupture ligamentară</li>
+            <li><strong>Luxații</strong>: dislocare articulară</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="alte">
+          <h4>Alte afecțiuni:</h4>
+          <ul>
+            <li><strong>Osteoporoză</strong>: pierdere densitate osoasă</li>
+            <li><strong>Osteoartrită</strong>: degenerare articulară</li>
+            <li><strong>Osteomielită</strong>: infecție osoasă</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="interactive-box">
+        <h4>Prevenire</h4>
+        <p>Alimentație bogată în calciu și vitamina D, exerciții fizice regulate, postură corectă, evitarea traumatismelor, control medical periodic.</p>
+      </div>
+    </section>
+  </div>
+  
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="zoomedImage">
+  </div>
+  
+  <div class="floating-btns">
+    <button class="floating-btn" id="summary-btn" title="Rezumat"><i class="fas fa-book"></i></button>
+    <button class="floating-btn" id="quiz-btn" title="Test rapid"><i class="fas fa-question"></i></button>
+    <button class="floating-btn" id="top-btn" title="Sus"><i class="fas fa-arrow-up"></i></button>
+  </div>
+
+  <footer>
+    bibliografie: "https://bacbioro.weebly.com/sistemul-osos.html"
+    <br>
+    "https://manuale.edu.ro/manuale/Clasa%20a%20XI-a/Biologie/Corint1/A367.pdf"
+    <br>
+    "https://www.academia.edu/113790493/Barrons_2022_Anatomy_and_Physiology_for_Dummies"
+  </footer>
+
+  <script>
+    
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+        
+        
+        quizOptions.forEach(opt => {
+          opt.classList.remove('correct', 'incorrect');
+        });
+        
+        
+        if (isCorrect) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('incorrect');
+          
+          document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+        }
+      });
+    });
+    
+    
+    document.getElementById('top-btn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    document.getElementById('quiz-btn').addEventListener('click', () => {
+      const quizSection = document.querySelector('.quiz-container');
+      if (quizSection) {
+        quizSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    
+    document.getElementById('summary-btn').addEventListener('click', () => {
+      alert('Rezumatul lecției:\n\n1. Anatomia sistemului osos\n2. Structura detaliată a scheletului\n3. Funcțiile sistemului osos\n4. Dezvoltarea și creșterea oaselor\n5. Patologii ale sistemului osos');
+    });
+
+    
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById("zoomedImage");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const zoomableImages = document.querySelectorAll('.zoomable');
+
+    zoomableImages.forEach(img => {
+      img.addEventListener('click', function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        modalImg.alt = this.alt;
+      });
+    });
+
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = "none";
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

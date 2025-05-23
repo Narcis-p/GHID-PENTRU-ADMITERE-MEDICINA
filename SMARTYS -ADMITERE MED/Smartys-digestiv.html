@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistemul Digestiv - Smartys Med</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #f39c12;
+      --secondary: #2c3e50;
+      --accent: #e74c3c;
+      --dark: #d35400;
+      --light: #fdebd0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--primary));
+      color: var(--light);
+      animation: fadeIn 1s ease-in-out;
+      line-height: 1.6;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      padding: 25px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+      background: linear-gradient(to right, var(--secondary), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    a.home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    a.home-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(-3px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    h2, h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2:after, h3:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(to right, var(--secondary), transparent);
+      border-radius: 3px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    li:before {
+      content: '•';
+      color: var(--secondary);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .interactive-box {
+      background: rgba(243, 156, 18, 0.3);
+      border-left: 4px solid var(--secondary);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+
+    .interactive-box h4 {
+      margin-top: 0;
+      color: var(--secondary);
+    }
+
+    .quiz-container {
+      background: rgba(44, 62, 80, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-option {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .quiz-option.correct {
+      background: rgba(76, 175, 80, 0.7);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(244, 67, 54, 0.7);
+    }
+
+    .tab-container {
+      margin: 30px 0;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      color: var(--secondary);
+    }
+
+    .tab-btn.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .diagram {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
+    .diagram img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 2px solid var(--secondary);
+      cursor: zoom-in;
+      transition: transform 0.3s;
+    }
+
+    .diagram img.zoomed {
+      transform: scale(1.8);
+      cursor: zoom-out;
+      z-index: 100;
+      position: relative;
+    }
+
+    .memory-tip {
+      background: rgba(44, 62, 80, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .memory-tip i {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+   footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #ddd;
+      background: rgba(0,0,0,0.3);
+      margin-top: 50px;
+      font-weight: normal;
+    }
+
+    .floating-btns {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .floating-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+      background: var(--secondary);
+    }
+
+    
+    .flashcards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .flashcard {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 150px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .flashcard-front, .flashcard-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .flashcard-front {
+      background: rgba(243, 156, 18, 0.5);
+      z-index: 2;
+    }
+
+    .flashcard-back {
+      background: rgba(44, 62, 80, 0.5);
+      transform: rotateY(180deg);
+    }
+    
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard h4 {
+      margin-top: 0;
+      color: var(--secondary);
+      text-align: center;
+    }
+
+    .flashcard p {
+      text-align: center;
+    }
+
+    .flashcard-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      .flashcards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      margin-top: 5vh;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: var(--secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="lectii.html" class="home-btn"><i class="fas fa-arrow-left"></i> Inapoi</a>
+
+  <header>
+    <h1>Sistemul Digestiv</h1>
+    <p class="header-subtitle">Anatomie și fiziologie a procesului digestiv</p>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Componentele sistemului digestiv</h2>
+      
+      <p>Sistemul digestiv este alcătuit din tub digestiv și glande anexe.</p>
+      
+      <div class="interactive-box">
+        <h4>Funcția principală</h4>
+        <p>Sistemul digestiv transformă alimentele în substanțe nutritive care pot fi absorbite și utilizate de organism.</p>
+      </div>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-teeth flashcard-icon"></i>
+            <h4>Tubul digestiv</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Traseul alimentelor prin corp:</p>
+            <ul style="text-align: left;">
+              <li>Cavitatea bucală</li>
+              <li>Faringe</li>
+              <li>Esofag</li>
+              <li>Stomac</li>
+              <li>Intestin subțire</li>
+              <li>Intestin gros</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-gland flashcard-icon"></i>
+            <h4>Glandele anexe</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Organe care ajută digestia:</p>
+            <ul style="text-align: left;">
+              <li>Glandele salivare</li>
+              <li>Ficatul</li>
+              <li>Pancreasul</li>
+              <li>Vezica biliară</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tubul digestiv</h2>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="bucala">Cavitatea bucală</button>
+          <button class="tab-btn" data-tab="faringe">Faringe</button>
+          <button class="tab-btn" data-tab="esofag">Esofag</button>
+          <button class="tab-btn" data-tab="stomac">Stomac</button>
+          <button class="tab-btn" data-tab="intestin">Intestin</button>
+        </div>
+        
+        <div class="tab-content active" id="bucala">
+          <h4>Structura cavității bucale</h4>
+          <ul>
+            <li><strong>Limba</strong>: organ musculos cu rol în vorbire, masticatie, deglutiție și sensibilitate gustativă</li>
+            <li><strong>Dinți</strong>: organe dure cu rol în masticatie și vorbire</li>
+            <li><strong>Glandele salivare</strong>: secretă salivă pentru începerea digestiei</li>
+          </ul>
+          
+          <div class="diagram">
+            <img src="https://www.romedic.ro/arata_img.php?img=anatomie_53_9.jpg&w=1000&h=2000&cale=/uploadart/anatomie" alt="Cavitatea bucală" class="zoomable">
+          </div>
+        </div>
+        
+        <div class="tab-content" id="faringe">
+          <h4>Faringele</h4>
+          <ul>
+            <li>Conduct musculo-membranos</li>
+            <li>Loc de încrucișare a căii digestive cu cea respiratorie</li>
+            <li>Comunică anterior cu fosele nazale, cavitatea bucală și laringele</li>
+            <li>Comunică lateral cu urechea medie</li>
+            <li>Comunică inferior cu esofagul</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="esofag">
+          <h4>Esofagul</h4>
+          <ul>
+            <li>Organ musculo-membranos</li>
+            <li>Situat posterior față de trahee</li>
+            <li>Rol în deglutiție</li>
+            <li>Transportă alimentele de la faringe la stomac</li>
+          </ul>
+
+           <div class="diagram">
+            <img src="https://www.romedic.ro/arata_img.php?img=anatomie_68_19.jpg&w=1000&h=2000&cale=/uploadart/anatomie" alt="Anatomia esofag" class="zoomable">
+          </div>
+        </div>
+        
+        <div class="tab-content" id="stomac">
+          <h4>Stomacul</h4>
+          <ul>
+            <li>Situat în abdomen, în loja gastrică</li>
+            <li>Organ cavitar</li>
+            <li>Comunică cu esofagul prin orificiul cardia</li>
+            <li>Comunică cu duodenul prin orificiul pilor</li>
+            <li>Parte componente: fornix (fundul stomacului), corp, antru și canal piloric</li>
+            <li>Conține glande gastrice care secretă suc gastric</li>
+          </ul>
+          
+          <div class="diagram">
+            <img src="https://www.romedic.ro/arata_img.php?img=anatomie_87_16.jpg&w=1000&h=2000&cale=/uploadart/anatomie" alt="Anatomia stomacului" class="zoomable">
+          </div>
+        </div>
+        
+        <div class="tab-content" id="intestin">
+          <h4>Intestinul</h4>
+          
+          <h5>Intestinul subțire</h5>
+          <ul>
+            <li>Se întinde de la pilor la valvula ileocecală</li>
+            <li>Trei segmente: duoden, jejun și ileon</li>
+            <li>Duodenul conține capul pancreasului</li>
+            <li>Conține vilozități intestinale pentru absorbție</li>
+          </ul>
+          
+          <h5>Intestinul gros</h5>
+          <ul>
+            <li>Se întinde de la valvula ileocecală până la anus</li>
+            <li>Mucoasă lipsită de vilozități</li>
+            <li>Parte componente: cec, colon și rect</li>
+            <li>Colonul are segmentele: ascendent, transvers, descendent și sigmoid</li>
+          </ul>
+          
+          <div class="diagram">
+            <img src="https://www.colegiu.info/wp-content/uploads/2017/09/Intestinul-subtire-Intestinul-gros.jpg" alt="Intestinul subțire și gros" class="zoomable">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Glandele anexe</h2>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="salivare">Glandele salivare</button>
+          <button class="tab-btn" data-tab="ficat">Ficatul</button>
+          <button class="tab-btn" data-tab="pancreas">Pancreasul</button>
+        </div>
+        
+        <div class="tab-content active" id="salivare">
+          <h4>Glandele salivare</h4>
+          <ul>
+            <li><strong>Parotide</strong>: cea mai mare glandă salivară</li>
+            <li><strong>Sublinguale</strong>: situată sub limbă</li>
+            <li><strong>Submandibulară</strong>: situată sub mandibulă</li>
+            <li>Secretează salivă pentru începerea digestiei</li>
+            <li>Saliva conține amilază salivară (ptialină) pentru digestia amidonului</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="ficat">
+          <h4>Ficatul</h4>
+          <ul>
+            <li>Situat în cavitatea abdominală, sub diafragmă</li>
+            <li>Secretă bilă pentru digestia grăsimilor</li>
+            <li>Alcătuit din lobi, segmente și lobuli</li>
+            <li>Lobulul hepatic este unitatea structurală și funcțională</li>
+            <li>Conține hepatocite (celulele ficatului)</li>
+          </ul>
+          
+          <div class="diagram">
+            <img src="https://sanatatea-ficatului.ro/images/Anatomia-ficatului.jpg" alt="Anatomia ficatului" class="zoomable">
+          </div>
+        </div>
+        
+        <div class="tab-content" id="pancreas">
+          <h4>Pancreasul</h4>
+          <ul>
+            <li>Glandă mixtă (endocrină și exocrină)</li>
+            <li>Situat retroperitoneal, înapoia stomacului</li>
+            <li>Parte componente: cap, corp și coadă</li>
+            <li>Partea exocrină secretă suc pancreatic</li>
+            <li>Sucul pancreatic conține enzime pentru digestia proteinelor, grăsimilor și glucidelor</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Procesul digestiv</h2>
+      
+      <div class="memory-tip">
+        <i class="fas fa-lightbulb"></i>
+        <div>
+          <h4>Definiție importantă:</h4>
+          <p>"Digestia reprezintă totalitatea transformărilor mecanice, fizice și biochimice suferite de alimente în tubul digestiv."</p>
+        </div>
+      </div>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="bucala-dig">Digestia bucală</button>
+          <button class="tab-btn" data-tab="gastrica">Digestia gastrică</button>
+          <button class="tab-btn" data-tab="intestinala">Digestia intestinală</button>
+        </div>
+        
+        <div class="tab-content active" id="bucala-dig">
+          <h4>Procese în cavitatea bucală</h4>
+          <ul>
+            <li><strong>Masticatia</strong>: proces mecanic de tăiere, zdrobire și mărunțire a alimentelor</li>
+            <li><strong>Salivația</strong>: impregnarea alimentelor cu salivă</li>
+            <li><strong>Formarea bolului alimentar</li>
+            <li><strong>Deglutiția</strong>: trecerea bolului alimentar în faringe și esofag</li>
+          </ul>
+          
+          <div class="interactive-box">
+            <h4>Componenții salivei</h4>
+            <ul>
+              <li>Amilaza salivară (ptialină) - digestia amidonului</li>
+              <li>Mucină - rol liant pentru formarea bolului alimentar</li>
+              <li>Lizozim - acțiune bactericidă</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="gastrica">
+          <h4>Procese în stomac</h4>
+          <ul>
+            <li><strong>Sucul gastric</strong>: pH foarte acid (2,5-5)</li>
+            <li><strong>Componente</strong>:
+              <ul>
+                <li>Acid clorhidric (HCl) - activează enzimele și are acțiune bactericidă</li>
+                <li>Pepsinogen (transformat în pepsina) - digestia proteinelor</li>
+                <li>Lipază gastrică - digestia parțială a grăsimilor</li>
+                <li>Mucus - protecție a mucoasei gastrice</li>
+              </ul>
+            </li>
+            <li><strong>Formarea chimului gastric</strong>: pastă acidă trimisă în intestin</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="intestinala">
+          <h4>Procese în intestinul subțire</h4>
+          <ul>
+            <li><strong>Bila</strong>: secretată de ficat, emulsionează grăsimile</li>
+            <li><strong>Sucul pancreatic</strong>: conține enzime pentru digestia proteinelor, grăsimilor și glucidelor</li>
+            <li><strong>Sucul intestinal</strong>: completează digestia</li>
+            <li><strong>Absorția nutrienților</strong>: prin vilozitățile intestinale</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Absorția nutrienților</h2>
+      
+      <div class="interactive-box">
+        <h4>Adaptări pentru absorbție</h4>
+        <p>Intestinul subțire are o suprafață foarte mare de absorbție datorită:</p>
+        <ul>
+          <li>Valvulelor conivente (pliuri mari)</li>
+          <li>Vilozităților intestinale (pliuri în formă de deget)</li>
+          <li>Microvililor la nivelul enterocitelor</li>
+        </ul>
+      </div>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="proteine">Proteine</button>
+          <button class="tab-btn" data-tab="glucide">Glucide</button>
+          <button class="tab-btn" data-tab="lipide">Lipide</button>
+          <button class="tab-btn" data-tab="vitamine">Vitamine</button>
+        </div>
+        
+        <div class="tab-content active" id="proteine">
+          <h4>Absorbția proteinelor</h4>
+          <ul>
+            <li>Se face sub formă de aminoacizi</li>
+            <li>Prin mecanisme active</li>
+            <li>La sugari, unele proteine nedigerate pot fi absorbite prin pinocitoză</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="glucide">
+          <h4>Absorbția glucidelor</h4>
+          <ul>
+            <li>Se face sub formă de monozaharide</li>
+            <li>Hexoze (glucoză, fructoză, galactoză) - absorbție activă</li>
+            <li>Pentoze (riboză) - absorbție pasivă</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="lipide">
+          <h4>Absorbția lipidelor</h4>
+          <ul>
+            <li>Se face sub formă de acizi grași și glicerol</li>
+            <li>Acizii grași cu lanț scurt - absorbție în sânge</li>
+            <li>Acizii grași cu lanț lung - absorbție în limfă sub formă de chilomicroni</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="vitamine">
+          <h4>Absorbția vitaminelor</h4>
+          <ul>
+            <li><strong>Vitamine liposolubile</strong> (A, D, E, K): absorbție împreună cu grăsimile</li>
+            <li><strong>Vitamine hidrosolubile</strong> (B, C): absorbție rapidă în apă</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Unde are loc absorbția principală a nutrienților?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Stomac</div>
+          <div class="quiz-option" data-correct="true">Intestinul subțire</div>
+          <div class="quiz-option" data-correct="false">Intestinul gros</div>
+          <div class="quiz-option" data-correct="false">Esofag</div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="zoomedImage">
+  </div>
+  
+  <div class="floating-btns">
+    <button class="floating-btn" id="summary-btn" title="Rezumat"><i class="fas fa-book"></i></button>
+    <button class="floating-btn" id="quiz-btn" title="Test rapid"><i class="fas fa-question"></i></button>
+    <button class="floating-btn" id="top-btn" title="Sus"><i class="fas fa-arrow-up"></i></button>
+  </div>
+
+  <footer>
+    bibliografie: "https://bacbioro.weebly.com/digestia-si-absortia.html"
+    <br>
+    "https://manuale.edu.ro/manuale/Clasa%20a%20XI-a/Biologie/Corint1/A367.pdf"
+    <br>
+    "https://www.academia.edu/113790493/Barrons_2022_Anatomy_and_Physiology_for_Dummies"
+  </footer>
+
+  <script>
+    
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+        
+       
+        quizOptions.forEach(opt => {
+          opt.classList.remove('correct', 'incorrect');
+        });
+        
+        
+        if (isCorrect) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('incorrect');
+          
+          
+          document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+        }
+      });
+    });
+    
+    
+    document.getElementById('top-btn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    document.getElementById('quiz-btn').addEventListener('click', () => {
+      const quizSection = document.querySelector('.quiz-container');
+      if (quizSection) {
+        quizSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    
+    document.getElementById('summary-btn').addEventListener('click', () => {
+      alert('Rezumatul lecției:\n\n1. Componentele sistemului digestiv\n2. Tubul digestiv și glandele anexe\n3. Procesul digestiv (bucal, gastric, intestinal)\n4. Absorbția nutrienților');
+    });
+
+    
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById("zoomedImage");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const zoomableImages = document.querySelectorAll('.zoomable');
+
+    zoomableImages.forEach(img => {
+      img.addEventListener('click', function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        modalImg.alt = this.alt;
+      });
+    });
+
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = "none";
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

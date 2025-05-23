@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistemul Nervos - Smartys Med</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6a4c93;
+      --secondary: #ffa3d7;
+      --accent: #8a5a44;
+      --dark: #2a0944;
+      --light: #f8f1ff;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--primary));
+      color: var(--light);
+      animation: fadeIn 1s ease-in-out;
+      line-height: 1.6;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      padding: 25px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+      background: linear-gradient(to right, var(--secondary), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    a.home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    a.home-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(-3px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    h2, h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2:after, h3:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(to right, var(--secondary), transparent);
+      border-radius: 3px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    li:before {
+      content: '•';
+      color: var(--secondary);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .interactive-box {
+      background: rgba(106, 76, 147, 0.3);
+      border-left: 4px solid var(--secondary);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+
+    .interactive-box h4 {
+      margin-top: 0;
+      color: var(--secondary);
+    }
+
+    .quiz-container {
+      background: rgba(255, 163, 215, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-option {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .quiz-option.correct {
+      background: rgba(76, 175, 80, 0.7);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(244, 67, 54, 0.7);
+    }
+
+    .tab-container {
+      margin: 30px 0;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      color: var(--secondary);
+    }
+
+    .tab-btn.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+    }
+
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .neuron-diagram {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
+    .neuron-diagram img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .memory-tip {
+      background: rgba(138, 90, 68, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .memory-tip i {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-top: 3px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #ddd;
+      background: rgba(0,0,0,0.3);
+      margin-top: 50px;
+    }
+
+    .floating-btns {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .floating-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+      background: var(--secondary);
+    }
+
+    
+    .flashcards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .flashcard {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 150px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .flashcard-front, .flashcard-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .flashcard-front {
+      background: rgba(106, 76, 147, 0.5);
+      z-index: 2;
+    }
+
+    .flashcard-back {
+      background: rgba(138, 90, 68, 0.5);
+      transform: rotateY(180deg);
+    }
+    
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard h4 {
+      margin-top: 0;
+      color: var(--secondary);
+      text-align: center;
+    }
+
+    .flashcard p {
+      text-align: center;
+    }
+
+    .flashcard-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      .flashcards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="lectii.html" class="home-btn"><i class="fas fa-arrow-left"></i> Inapoi</a>
+
+  <header>
+    <h1>Sistemul Nervos</h1>
+    <p class="header-subtitle">Ghid complet pentru admiterea la Medicină</p>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Clasificarea sistemului nervos</h2>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-brain flashcard-icon"></i>
+            <h4>Funcțional</h4>
+            <p>Click pentru a vedea clasificarea</p>
+          </div>
+          <div class="flashcard-back">
+            <h4>Sistem nervos:</h4>
+            <p>- Somatic (viața de relație)</p>
+            <p>- Vegetativ (viața vegetativă)</p>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-map-marked-alt flashcard-icon"></i>
+            <h4>Topografic</h4>
+            <p>Click pentru a vedea clasificarea</p>
+          </div>
+          <div class="flashcard-back">
+            <h4>Sistem nervos:</h4>
+            <p>- Central (SNC)</p>
+            <p>- Periferic (SNP)</p>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-running flashcard-icon"></i>
+            <h4>Sistemul somatic</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Asigură activitatea motorie somatică și sensibilitatea senzitivo-senzorială</p>
+            <p><strong>Rol:</strong> integrarea organismului în mediul său de viață</p>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-heartbeat flashcard-icon"></i>
+            <h4>Sistemul vegetativ</h4>
+            <p>Click pentru detalii</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Coordonează activitatea organelor interne (viscerelor)</p>
+            <p><strong>Diviziuni:</strong></p>
+            <p>- Simpatic (situații neobișnuite)</p>
+            <p>- Parasimpatic (condiții obișnuite)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Care dintre următoarele este responsabil de coordonarea activității organelor interne?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Sistemul nervos somatic</div>
+          <div class="quiz-option" data-correct="true">Sistemul nervos vegetativ</div>
+          <div class="quiz-option" data-correct="false">Sistemul nervos central</div>
+          <div class="quiz-option" data-correct="false">Sistemul nervos periferic</div>
+        </div>
+        
+        <div class="quiz-question" style="margin-top: 20px;">2. Care sunt cele două diviziuni principale ale sistemului nervos vegetativ?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true">Simpatic și parasimpatic</div>
+          <div class="quiz-option" data-correct="false">Central și periferic</div>
+          <div class="quiz-option" data-correct="false">Somatic și vegetativ</div>
+          <div class="quiz-option" data-correct="false">Senitiv și motor</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Structura sistemului nervos central</h2>
+      
+      <div class="memory-tip">
+        <i class="fas fa-lightbulb"></i>
+        <div>
+          <h4>Pont pentru memorare:</h4>
+          <p>"SNC = Creier + Măduva spinării. SNP = Nervi + Ganglioni"</p>
+        </div>
+      </div>
+      
+      <h3>I. SNC (ax cerebrospinal)</h3>
+      <ul>
+        <li><strong>Maduva spinării</strong>: situată în canalul vertebral de la C1 la L2</li>
+        <li><strong>Encefalul</strong>:
+          <ul>
+            <li>Trunchi cerebral (bulb, punte, mezencefal)</li>
+            <li>Cerebel</li>
+            <li>Diencefal (talamus, hipotalamus etc.)</li>
+            <li>Emisfere cerebrale</li>
+          </ul>
+        </li>
+      </ul>
+      
+      <h3>II. SNP (sistem nervos periferic)</h3>
+      <ul>
+        <li><strong>Nervi periferici</strong>:
+          <ul>
+            <li>12 perechi de nervi cranieni</li>
+            <li>31 perechi de nervi spinali</li>
+          </ul>
+        </li>
+        <li><strong>Ganglionii nervoși</strong>:
+          <ul>
+            <li>Ganglioni spinali</li>
+            <li>Ganglioni cranieni</li>
+            <li>Ganglioni vegetativi</li>
+          </ul>
+        </li>
+      </ul>
+      
+      <div class="interactive-box">
+        <h4>Did you know?</h4>
+        <p>Meningele (duramater, arahnoida, piamater) protejează SNC. Lichidul cefalo-rahidian se află între arahnoida și piamater, având rol trofic și de protecție mecanică.</p>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test rapid de verificare</h3>
+        <div class="quiz-question">1. Care dintre următoarele NU face parte din encefal?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Cerebel</div>
+          <div class="quiz-option" data-correct="false">Hipotalamus</div>
+          <div class="quiz-option" data-correct="true">Maduva spinării</div>
+          <div class="quiz-option" data-correct="false">Trunchiul cerebral</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+  <h2>Funcția reflexă și arcul reflex</h2>
+  
+  <p>Funcția reflexă este modalitatea fundamentală prin care sistemul nervos răspunde la stimuli din mediu. Reacția automată, rapidă și stereotipă se numește <strong>reflex</strong>. Această reacție este posibilă datorită unei structuri funcționale numite <strong>arc reflex</strong>.</p>
+  
+  <h3>Ce este arcul reflex?</h3>
+  <p>Arcul reflex este traseul parcurs de influxul nervos de la receptor (care detectează stimulul) până la efector (care răspunde la comandă). Este baza fiziologică a oricărui reflex.</p>
+  
+  <h3>Componentele arcului reflex</h3>
+  <ol>
+    <li><strong>Receptor:</strong> detectează stimulul și îl transformă în influx nervos.</li>
+    <li><strong>Calea aferentă (senzitivă):</strong> transmite influxul nervos spre centrul nervos.</li>
+    <li><strong>Centrul nervos:</strong> integrează informația și generează un răspuns.</li>
+    <li><strong>Calea eferentă (motorie):</strong> transmite comanda către efector.</li>
+    <li><strong>Efector:</strong> execută răspunsul — un mușchi se contractă sau o glandă secretă.</li>
+  </ol>
+
+  <h3>Clasificarea receptorilor</h3>
+  
+  <div class="tab-container">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="receptori">Tipuri de receptori</button>
+      <button class="tab-btn" data-tab="localizare">După localizare</button>
+      <button class="tab-btn" data-tab="natura">După natura stimulului</button>
+    </div>
+    
+    <div class="tab-content active" id="receptori">
+      <ul>
+        <li><strong>Exteroreceptori:</strong> în piele, responsabili pentru percepția mediului extern (temperatură, presiune, durere, tact etc.).</li>
+        <li><strong>Proprioreceptori:</strong> în mușchi, tendoane și articulații — detectează poziția și mișcările corpului.</li>
+        <li><strong>Interoreceptori (visceroreceptori):</strong> în organele interne — detectează starea mediului intern (pH, tensiune, dilatare etc.).</li>
+      </ul>
+    </div>
+    
+    <div class="tab-content" id="localizare">
+      <ul>
+        <li><strong>Telereceptori:</strong> percep stimuli de la distanță (ex: lumină — ochi; sunete — ureche).</li>
+        <li><strong>Contactoreceptori:</strong> percep stimuli în contact direct (ex: piele).</li>
+      </ul>
+    </div>
+    
+    <div class="tab-content" id="natura">
+      <ul>
+        <li><strong>Mecanoreceptori:</strong> răspund la presiune, vibrații, întindere.</li>
+        <li><strong>Termoreceptori:</strong> răspund la variații de temperatură.</li>
+        <li><strong>Nociceptori:</strong> detectează durerea.</li>
+        <li><strong>Fotoreceptori:</strong> captează lumina (retina ochiului).</li>
+        <li><strong>Chemoceptori:</strong> detectează compoziția chimică (ex: miros, gust, pH sanguin).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quiz-container">
+    <h3>Test rapid de verificare</h3>
+    <div class="quiz-question">1. Care este ordinea corectă a componentelor arcului reflex?</div>
+    <div class="quiz-options">
+      <div class="quiz-option" data-correct="false">Efector → Receptor → SNC → Calea eferentă</div>
+      <div class="quiz-option" data-correct="true">Receptor → Calea aferentă → SNC → Calea eferentă → Efector</div>
+      <div class="quiz-option" data-correct="false">SNC → Calea aferentă → Receptor → Efector</div>
+      <div class="quiz-option" data-correct="false">Receptor → Efector → SNC</div>
+    </div>
+  </div>
+</section>
+
+
+    <section>
+      <h2>Căile de conducere nervoasă</h2>
+      
+      <div class="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-arrow-up flashcard-icon"></i>
+            <h4>Căi ascendente</h4>
+            <p>(senzitive)</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Conduc excitații de la receptori la centri nervosi</p>
+            <ul style="text-align: left; padding-left: 20px;">
+              <li>Exteroceptive</li>
+              <li>Proprioceptive</li>
+              <li>Interoceptive</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-front">
+            <i class="fas fa-arrow-down flashcard-icon"></i>
+            <h4>Căi descendente</h4>
+            <p>(motorii)</p>
+          </div>
+          <div class="flashcard-back">
+            <p>Conduc comenzi de la centri nervosi</p>
+            <ul style="text-align: left; padding-left: 20px;">
+              <li>Piramidale (voluntare)</li>
+              <li>Extrapiramidale (involuntare)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <h3>Substanța cenușie vs. substanța albă</h3>
+      <ul>
+        <li><strong>Substanța cenușie</strong>: corpurile neuronale, procesare informații</li>
+        <li><strong>Substanța albă</strong>: fibre nervoase (axoni), transmitere informații</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Patologii ale sistemului nervos</h2>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="meningita">Meningita</button>
+          <button class="tab-btn" data-tab="hemoragii">Hemoragii cerebrale</button>
+          <button class="tab-btn" data-tab="coma">Coma</button>
+        </div>
+        
+        <div class="tab-content active" id="meningita">
+          <h4>Cauze:</h4>
+          <p>Infecții (virale, bacteriene, fungice), toxine, alergii</p>
+          
+          <h4>Simptome:</h4>
+          <ul>
+            <li>Dureri de cap intense</li>
+            <li>Febră</li>
+            <li>Fotofobie</li>
+            <li>Rigiditate în gât</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="hemoragii">
+          <h4>Cauze:</h4>
+          <p>Hipertensiune, traumatisme, malformații vasculare</p>
+          
+          <h4>Simptome:</h4>
+          <ul>
+            <li>Cefalee bruscă și severă</li>
+            <li>Vărsături</li>
+            <li>Pupile inegale</li>
+            <li>Pierdere de cunoștință</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="coma">
+          <h4>Cauze:</h4>
+          <p>Traume, intoxicații, accidente vasculare</p>
+          
+          <h4>Simptome:</h4>
+          <ul>
+            <li>Pierdere de cunoștință</li>
+            <li>Lipsă răspuns la stimuli</li>
+            <li>Funcții vegetative păstrate</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="interactive-box">
+        <h4>Prevenire</h4>
+        <p>Stil de viață sănătos, evitarea stresului excesiv, control medical regulat, vaccinări (pentru meningită), protecție la activități cu risc de traumatisme.</p>
+      </div>
+    </section>
+      </div>
+      
+  <div class="floating-btns">
+    <button class="floating-btn" id="summary-btn" title="Rezumat"><i class="fas fa-book"></i></button>
+    <button class="floating-btn" id="quiz-btn" title="Test rapid"><i class="fas fa-question"></i></button>
+    <button class="floating-btn" id="top-btn" title="Sus"><i class="fas fa-arrow-up"></i></button>
+  </div>
+
+  <footer>
+    bibliografie: "https://bacbioro.weebly.com/sistemul-nervos.html"
+    <br>
+    "https://manuale.edu.ro/manuale/Clasa%20a%20XI-a/Biologie/Corint1/A367.pdf"
+    <br>
+    "https://www.academia.edu/113790493/Barrons_2022_Anatomy_and_Physiology_for_Dummies"
+  </footer>
+
+  <script>
+    
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+        
+        
+        quizOptions.forEach(opt => {
+          opt.classList.remove('correct', 'incorrect');
+        });
+        
+        
+        if (isCorrect) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('incorrect');
+         
+          document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+        }
+      });
+    });
+    
+ 
+    document.getElementById('top-btn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    document.getElementById('quiz-btn').addEventListener('click', () => {
+      const quizSection = document.querySelector('.quiz-container');
+      if (quizSection) {
+        quizSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    
+    document.getElementById('summary-btn').addEventListener('click', () => {
+      alert('Rezumatul lecției:\n\n1. Clasificarea sistemului nervos\n2. Structura SNC și SNP\n3. Funcția reflexă și arcul reflex\n4. Căile de conducere nervoasă\n5. Patologii ale sistemului nervos');
+    });
+  </script>
+</body>
+</html>
